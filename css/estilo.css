@@ -210,6 +210,11 @@ body {
         font-size: 80px;
     }
 
+    /* En el monitor el título va en un solo renglón: se oculta el <br> del celular */
+    .solo-celu {
+        display: none;
+    }
+
     .hero p {
         font-size: 30px;
     }
