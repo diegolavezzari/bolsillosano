@@ -51,6 +51,7 @@ body {
     padding: 0 24px;                   /* separa el logo del borde redondeado */
     display: flex;                     /* pone lo de adentro en fila */
     align-items: center;               /* y lo centra de arriba a abajo */
+    justify-content: space-between;    /* la marca a la izquierda, el menú a la derecha */
 }
 
 /* Marca: logo + nombre, uno al lado del otro */
@@ -62,7 +63,7 @@ body {
 
 /* height fija y width: auto para que el logo no se deforme */
 .marca-logo {
-    height: 46px;
+    height: 40px;
     width: auto;
 }
 
@@ -70,6 +71,24 @@ body {
     color: var(--verde-bs);            /* el mismo verde del logo */
     font-size: 22px;
     font-weight: bold;
+    display: none;                     /* en el celular no entra junto al menú: se ve solo el logo */
+}
+
+/* Menú: los 3 links en fila */
+.menu {
+    display: flex;
+    gap: 12px;                         /* espacio entre un link y otro */
+}
+
+.menu a {
+    color: var(--azul-bs);
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;             /* saca el subrayado que traen los links */
+}
+
+.menu a:hover {
+    color: var(--verde-bs);            /* cambia de color al pasar el mouse */
 }
 
 /* El JS le pone esta clase cuando bajás: la barra sube y sale de la pantalla */
@@ -95,6 +114,9 @@ body {
     color: #1e3a6e;                    /* azul oscuro, parecido al de la app en la notebook */
     font-size: 42px;
     line-height: 1;
+    /* sombra: corrimiento horizontal, vertical, difuminado y color.
+       Un halo blanco detrás del azul lo despega de la foto */
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
 }
 
 /* Texto de abajo del título: otro color y otro tamaño */
@@ -102,6 +124,7 @@ body {
     margin: 0 0 24px 0;
     color: #fafcfb;                    /* el mismo verde de la tarjeta "Alertas a tiempo" */
     font-size: 20px;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);     /* sombra oscura detrás del texto blanco */
 }
 
 
@@ -219,6 +242,23 @@ body {
    Esto solo se aplica si la pantalla mide 768px o más. */
 @media (min-width: 768px) {
 
+    /* En el monitor hay lugar: se muestra el nombre y el menú más grande */
+    .marca-nombre {
+        display: inline;
+    }
+
+    .marca-logo {
+        height: 46px;
+    }
+
+    .menu {
+        gap: 40px;
+    }
+
+    .menu a {
+        font-size: 18px;
+    }
+
     /* Portada: aspect-ratio le da a la caja la misma proporción que la foto
        (1024 de ancho por 612 de alto), así se ve entera, sin cortar arriba ni abajo */
     .hero {
@@ -256,5 +296,22 @@ body {
     .tarjeta {
         margin-bottom: 0;
         min-height: 420px;
+    }
+}
+
+
+/* ===== PANTALLAS MÁS GRANDES (1024px o más) ===== */
+
+/* Recién acá hay lugar para centrar el menú sin que pise el nombre */
+@media (min-width: 1024px) {
+
+    /* Menú en el centro de la barra.
+       position: absolute lo saca de la fila y lo ubica respecto del navegador.
+       left: 50% pone su borde izquierdo en la mitad, y
+       translateX(-50%) lo corre para atrás la mitad de su ancho: queda centrado */
+    .menu {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
