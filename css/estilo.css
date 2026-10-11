@@ -48,6 +48,28 @@ body {
     border-radius: 40px;               /* puntas redondeadas, forma de pastilla */
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s;        /* que suba y baje suave, no de golpe */
+    padding: 0 24px;                   /* separa el logo del borde redondeado */
+    display: flex;                     /* pone lo de adentro en fila */
+    align-items: center;               /* y lo centra de arriba a abajo */
+}
+
+/* Marca: logo + nombre, uno al lado del otro */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;                         /* espacio entre el logo y el nombre */
+}
+
+/* height fija y width: auto para que el logo no se deforme */
+.marca-logo {
+    height: 46px;
+    width: auto;
+}
+
+.marca-nombre {
+    color: var(--verde-bs);            /* el mismo verde del logo */
+    font-size: 22px;
+    font-weight: bold;
 }
 
 /* El JS le pone esta clase cuando bajás: la barra sube y sale de la pantalla */
