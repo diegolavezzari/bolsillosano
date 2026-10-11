@@ -61,7 +61,7 @@ body {
 /* La foto ocupa todo el ancho de fondo, limpia (sin degradé encima) */
 .hero {
     min-height: 480px;
-    padding: 110px 24px 32px 24px;     /* arriba más espacio: ahí flota el navegador */
+    padding: 50px 24px 32px 24px;     /* arriba más espacio: ahí flota el navegador */
     background-image: url("../img/portada.jpeg");    /* "../" sale de css/ para llegar a img/ */
     background-size: cover;            /* la foto cubre toda la caja, sin deformarse */
     background-position: center;
