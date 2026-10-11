@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inversiones - Bolsillo Sano</title>
+    <link rel="stylesheet" href="css/estilo.css?v=10">  <!-- ?v=10: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+</head>
+<body>
+
+    <!-- Navegador: el mismo de index.html -->
+    <nav class="navegador">
+        <!-- La marca lleva a la portada -->
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
+
+        <div class="menu">
+            <a href="#">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="#">Nosotros</a>
+        </div>
+    </nav>
+
+    <!-- ===== TEST DE PERFIL ===== -->
+    <div class="test">
+
+        <h1>¿Qué tipo de inversor sos?</h1>
+        <p class="test-intro">Contestá estas 5 preguntas y te decimos qué opciones de ahorro e inversión van con vos.</p>
+
+        <!-- Cada pregunta: las 3 opciones tienen el mismo name (así se elige una sola)
+             y en el value van los puntos que suma esa respuesta -->
+        <div class="pregunta">
+            <h3>1. ¿Para cuándo vas a necesitar esta plata?</h3>
+            <label><input type="radio" name="p1" value="1"> Menos de 6 meses</label>
+            <label><input type="radio" name="p1" value="2"> Entre 6 meses y 2 años</label>
+            <label><input type="radio" name="p1" value="3"> Más de 2 años</label>
+        </div>
+
+        <div class="pregunta">
+            <h3>2. Si tu inversión baja un 15% en un mes, ¿qué hacés?</h3>
+            <label><input type="radio" name="p2" value="1"> Saco todo</label>
+            <label><input type="radio" name="p2" value="2"> Espero a que se recupere</label>
+            <label><input type="radio" name="p2" value="3"> Pongo más, está barato</label>
+        </div>
+
+        <div class="pregunta">
+            <h3>3. ¿Qué es más importante para vos?</h3>
+            <label><input type="radio" name="p3" value="1"> No perder nada</label>
+            <label><input type="radio" name="p3" value="2"> Un equilibrio entre cuidar y ganar</label>
+            <label><input type="radio" name="p3" value="3"> Ganar lo máximo posible</label>
+        </div>
+
+        <div class="pregunta">
+            <h3>4. ¿Tenés un fondo de emergencia (3 meses de gastos ahorrados)?</h3>
+            <label><input type="radio" name="p4" value="1"> No</label>
+            <label><input type="radio" name="p4" value="2"> Algo tengo</label>
+            <label><input type="radio" name="p4" value="3"> Sí</label>
+        </div>
+
+        <div class="pregunta">
+            <h3>5. ¿Invertiste alguna vez?</h3>
+            <label><input type="radio" name="p5" value="1"> Nunca</label>
+            <label><input type="radio" name="p5" value="2"> Plazo fijo o billetera virtual</label>
+            <label><input type="radio" name="p5" value="3"> Acciones, bonos o cripto</label>
+        </div>
+
+        <button type="button" id="boton-perfil" class="boton">Ver mi perfil</button>
+
+        <!-- Acá el JS escribe "Contestá todas las preguntas" si falta alguna -->
+        <p id="aviso" class="aviso"></p>
+
+        <!-- ===== RESULTADOS =====
+             Los 3 perfiles ya están escritos y arrancan ocultos.
+             El JS muestra solo el que corresponde. -->
+
+        <!-- Aviso extra: aparece si contestó "No" en la pregunta 4 -->
+        <div id="sin-fondo" class="resultado resultado-alerta">
+            <h3>Antes de invertir: armá tu fondo de emergencia</h3>
+            <p>Juntá primero el equivalente a 3 meses de gastos en una cuenta remunerada, donde puedas sacarlo cuando quieras. Así, si surge un imprevisto, no tenés que vender tus inversiones.</p>
+        </div>
+
+        <div id="perfil-conservador" class="resultado">
+            <h2>Sos inversor <strong>conservador</strong></h2>
+            <p>Preferís cuidar lo que tenés antes que arriesgarlo. Estas opciones son de bajo riesgo:</p>
+            <ul>
+                <li><strong>Cuenta remunerada / billetera virtual:</strong> genera interés todos los días y podés sacar la plata cuando quieras.</li>
+                <li><strong>Plazo fijo tradicional:</strong> sabés desde el primer día cuánto vas a ganar (mínimo 30 días).</li>
+                <li><strong>Plazo fijo UVA:</strong> sigue a la inflación, así tu plata no pierde valor (mínimo 90 días).</li>
+            </ul>
+            <p class="resultado-reparto">Reparto sugerido: 80% en opciones seguras y 20% en moderadas.</p>
+        </div>
+
+        <div id="perfil-moderado" class="resultado">
+            <h2>Sos inversor <strong>moderado</strong></h2>
+            <p>Buscás un equilibrio: cuidar una parte y hacer crecer otra. Además de las opciones seguras, podés sumar:</p>
+            <ul>
+                <li><strong>Dólar MEP:</strong> te protege si el peso pierde valor.</li>
+                <li><strong>Bonos CER:</strong> bonos que se ajustan por inflación.</li>
+                <li><strong>Fondos comunes de renta fija:</strong> un grupo de inversiones manejado por profesionales.</li>
+            </ul>
+            <p class="resultado-reparto">Reparto sugerido: 50% seguro, 40% moderado y 10% arriesgado.</p>
+        </div>
+
+        <div id="perfil-agresivo" class="resultado">
+            <h2>Sos inversor <strong>agresivo</strong></h2>
+            <p>Aceptás que tu plata suba y baje para buscar ganar más a largo plazo. Además de lo anterior, podés sumar:</p>
+            <ul>
+                <li><strong>CEDEARs:</strong> acciones de empresas de afuera que se compran en pesos.</li>
+                <li><strong>Acciones argentinas:</strong> parte de empresas que cotizan en la bolsa local.</li>
+                <li><strong>Fondos de renta variable:</strong> fondos que invierten en acciones.</li>
+            </ul>
+            <p class="resultado-reparto">Reparto sugerido: 30% seguro, 30% moderado y 40% arriesgado.</p>
+        </div>
+
+        <p class="aclaracion">Simulación educativa. No es asesoramiento financiero.</p>
+    </div>
+
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+    </div>
+
+    <script src="js/inversiones.js"></script>
+</body>
+</html>
