@@ -69,7 +69,7 @@ body {
 
 /* Título "Bolsillo Sano es tu aliado": su propio color y tamaño */
 .hero h1 {
-    margin: 50px 10px 25px 0;
+    margin: 20px 10px 25px 0;
     color: #1e3a6e;                    /* azul oscuro, parecido al de la app en la notebook */
     font-size: 34px;
     line-height: 1;
