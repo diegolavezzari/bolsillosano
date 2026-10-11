@@ -59,6 +59,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;                         /* espacio entre el logo y el nombre */
+    text-decoration: none;             /* en inversiones.html la marca es un link: sin subrayado */
 }
 
 /* height fija y width: auto para que el logo no se deforme */
@@ -223,6 +224,114 @@ body {
 .tarjeta-boton:hover {
     background-color: white;
     color: var(--azul-bs);
+}
+
+
+/* ===== TEST DE PERFIL (inversiones.html) ===== */
+
+/* Columna centrada. El padding de arriba deja lugar al navegador fijo */
+.test {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 120px 16px 32px 16px;
+}
+
+.test h1 {
+    margin: 0 0 8px 0;
+    color: #1e3a6e;
+    font-size: 30px;
+}
+
+.test-intro {
+    margin: 0 0 24px 0;
+    color: var(--texto-suave);
+}
+
+/* Cada pregunta en una tarjeta con borde suave */
+.pregunta {
+    margin-bottom: 16px;
+    padding: 20px;
+    border: 2px solid #e3e8f0;
+    border-radius: 20px;
+}
+
+.pregunta h3 {
+    margin: 0 0 12px 0;
+    color: var(--azul-bs);
+    font-size: 18px;
+}
+
+/* display: block pone cada opción en su propio renglón */
+.pregunta label {
+    display: block;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+/* Botón principal, verde y redondeado como el navegador */
+.boton {
+    padding: 14px 32px;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--verde-bs);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: var(--azul-bs);
+}
+
+.aviso {
+    color: #c0392b;                    /* rojo: falta contestar algo */
+    font-weight: bold;
+}
+
+/* Los resultados arrancan ocultos... */
+.resultado {
+    display: none;
+    margin-top: 16px;
+    padding: 24px;
+    color: white;
+    border-radius: 24px;
+    background: linear-gradient(160deg, var(--verde-bs), var(--azul-bs));
+}
+
+/* ...y el JS les pone la clase "visible" al que corresponde */
+.resultado.visible {
+    display: block;
+}
+
+.resultado h2 {
+    margin: 0 0 12px 0;
+}
+
+.resultado li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.resultado-reparto {
+    font-weight: bold;
+}
+
+/* El aviso del fondo de emergencia, en amarillo para que se note */
+.resultado-alerta {
+    color: #5a4500;
+    background: #fff3c4;
+}
+
+.resultado-alerta h3 {
+    margin: 0 0 8px 0;
+}
+
+.aclaracion {
+    margin-top: 24px;
+    color: var(--texto-suave);
+    font-size: 13px;
 }
 
 
