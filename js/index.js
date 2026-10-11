@@ -4,15 +4,45 @@
 const anio = document.getElementById('anio');
 anio.textContent = new Date().getFullYear();
 
-// Simulador: al tocar "Calcular", muestra cómo queda la meta
-const boton = document.getElementById('btn-simular');
+// Tarjetas: el botón "Ver más" abre y cierra el texto extra.
+// querySelectorAll trae TODOS los botones con esa clase (una lista).
+const botones = document.querySelectorAll('.tarjeta-boton');
 
-boton.addEventListener('click', function () {
-    // .value es texto: Number() lo pasa a número
-    const monto = Number(document.getElementById('monto').value);
+// Recorremos la lista y a cada botón le agregamos su evento
+for (const boton of botones) {
+    boton.addEventListener('click', function () {
+        // parentElement = la tarjeta que contiene a este botón
+        const tarjeta = boton.parentElement;
 
-    // Meta de ejemplo: $450.000 ahorrados de $750.000
-    const nuevo = Math.round((450000 - monto) / 750000 * 100);
+        // toggle: si la tarjeta no tiene la clase "abierta" se la pone,
+        // y si ya la tiene se la saca. El CSS muestra u oculta el texto.
+        tarjeta.classList.toggle('abierta');
 
-    document.getElementById('resultado').textContent = 'Tu meta bajaría al ' + nuevo + '%';
+        if (tarjeta.classList.contains('abierta')) {
+            boton.textContent = 'Ver menos';
+        } else {
+            boton.textContent = 'Ver más';
+        }
+    });
+}
+
+// Navegador: se esconde al bajar y vuelve a aparecer al subir.
+const navegador = document.querySelector('.navegador');
+
+// Guardamos cuánto estaba bajada la página la vez anterior
+let anterior = window.scrollY;
+
+// El evento "scroll" se dispara cada vez que la página se mueve
+window.addEventListener('scroll', function () {
+    // scrollY = cuántos píxeles bajaste desde arriba de todo
+    const actual = window.scrollY;
+
+    // Si el número creció, estás bajando (y ya pasaste los primeros 100px)
+    if (actual > anterior && actual > 100) {
+        navegador.classList.add('oculto');
+    } else {
+        navegador.classList.remove('oculto');
+    }
+
+    anterior = actual;
 });

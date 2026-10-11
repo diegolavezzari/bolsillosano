@@ -8,62 +8,63 @@
 </head>
 <body>
 
-    <div class="bienvenida">
+    <!-- Navegador: por ahora vacío, después le ponemos el logo y los links -->
+    <nav class="navegador"></nav>
 
-        <!-- Barra de arriba: nombre de la app y acceso rápido al login -->
-        <div class="barra-superior">
-            <p class="logo">Bolsillo $ano</p>
+    <!-- Portada: la foto de fondo se pone desde el CSS (img/portada.jpeg) -->
+    <div class="hero">
+        <div class="hero-texto">
+            <h1>Bolsillo Sano es tu aliado</h1>
+            <p>Te ayuda a gestionar finanzas alcanzar metas<br> y mejorar hábitos financieros.</p>
+        </div>
+    </div>
+
+    <!-- Frase de presentación (texto para cambiar) -->
+    <div class="presentacion">
+        <h2>Te contamos nuestras herramientas para que<br>
+            <strong>tu plata de hoy rinda y tus metas de mañana se cumplan</strong></h2>
+    </div>
+
+    <!-- Tarjetas: hechas con HTML y CSS.
+         Cada una tiene su ícono en img/ (PNG con fondo transparente). -->
+    <div class="tarjetas">
+
+        <div class="tarjeta tarjeta-1">
+            <img src="img/icono_alertas_a_tiempo.png" alt="Ícono de reloj despertador" class="tarjeta-icono">
+            <h3>Alertas a tiempo</h3>
+            <p>Mantenete al día con recordatorios inteligentes de vencimientos y oportunidades.</p>
+            <p class="tarjeta-extra">Te avisamos antes de que una compra impulsiva afecte tu meta.</p>
+            <button type="button" class="tarjeta-boton">Ver más</button>
         </div>
 
-        <!-- Presentación principal -->
-        <div class="portada">
-            <h1>Frená tus compras impulsivas</h1>
-            <p>Bolsillo Sano te avisa cuando estás por gastar y te muestra cómo afecta a tus metas de ahorro.</p>
-
-            <div class="botones">
-                <a href="login.html" class="boton">Ingresar</a>
-                <a href="registro.html" class="boton boton-secundario">Crear cuenta</a>
-            </div>
-
-            <!-- Simulador: el usuario prueba cómo una compra afecta su meta -->
-            <div class="simulador">
-                <h2>Probá cómo funciona</h2>
-                <p>Ejemplo: tu meta es un <strong>Viaje a Europa</strong>. Ya ahorraste $450.000 de $750.000 (60%).</p>
-
-                <label for="monto">¿Cuánto vas a gastar?</label>
-                <input type="number" id="monto" placeholder="85000" min="0">
-
-                <button type="button" id="btn-simular" class="boton">Calcular</button>
-
-                <!-- Vacío: el JS escribe acá el resultado -->
-                <p id="resultado" class="resultado-alerta"></p>
-            </div>
+        <div class="tarjeta tarjeta-2">
+            <img src="img/icono_calculadora_de_gastos.png" alt="Ícono de calculadora" class="tarjeta-icono">
+            <h3>Calculadora de gastos</h3>
+            <p>Seguimiento preciso de tu dinero para un control total de tu presupuesto.</p>
+            <p class="tarjeta-extra">Cargá tus gastos y mirá en qué se va tu plata cada mes.</p>
+            <button type="button" class="tarjeta-boton">Ver más</button>
         </div>
 
-        <!-- Qué hace la app -->
-        <div class="beneficios">
-
-            <div class="beneficio cartel cartel-naranja">
-                <h2>Alertas a tiempo</h2>
-                <p>Cuando estás por comprar, te mostramos cuánto baja tu meta de ahorro.</p>
-            </div>
-
-            <div class="beneficio cartel cartel-verde">
-                <h2>Esperá 24 horas</h2>
-                <p>Posponé la compra un día y decidí con la cabeza fría.</p>
-            </div>
-
-            <div class="beneficio cartel cartel-violeta">
-                <h2>Tribunal de amigos</h2>
-                <p>Consultá a tus amigos antes de la compra.</p>
-            </div>
-
+        <div class="tarjeta tarjeta-3">
+            <img src="img/icono_inversiones.png" alt="Ícono de billete con flecha de crecimiento" class="tarjeta-icono">
+            <h3>Inversiones</h3>
+            <p>Hacé crecer tu patrimonio de forma inteligente y segura.</p>
+            <p class="tarjeta-extra">Lo que ahorrás puede trabajar para vos.</p>
+            <button type="button" class="tarjeta-boton">Ver más</button>
         </div>
 
-        <div class="pie">
-            <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+        <div class="tarjeta tarjeta-4">
+            <img src="img/icono_gestion_de_metas.png" alt="Ícono de barra de progreso de metas" class="tarjeta-icono">
+            <h3>Gestión de metas</h3>
+            <p>Establecé y visualizá tus objetivos financieros con herramientas de seguimiento dedicadas.</p>
+            <p class="tarjeta-extra">Mirá cuánto te falta para cada meta con una barra de progreso.</p>
+            <button type="button" class="tarjeta-boton">Ver más</button>
         </div>
 
+    </div>
+
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
     </div>
 
     <script src="js/index.js"></script>
