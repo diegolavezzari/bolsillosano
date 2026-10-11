@@ -71,7 +71,7 @@ body {
 .hero h1 {
     margin: 20px 10px 25px 0;
     color: #1e3a6e;                    /* azul oscuro, parecido al de la app en la notebook */
-    font-size: 34px;
+    font-size: 42px;
     line-height: 1;
 }
 
@@ -79,7 +79,7 @@ body {
 .hero p {
     margin: 0 0 24px 0;
     color: #fafcfb;                    /* el mismo verde de la tarjeta "Alertas a tiempo" */
-    font-size: 17px;
+    font-size: 20px;
 }
 
 
