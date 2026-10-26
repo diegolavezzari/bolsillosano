@@ -335,6 +335,55 @@ body {
 }
 
 
+/* ===== NOSOTROS (nosotros.html) ===== */
+
+/* Columna centrada. El padding de arriba deja lugar al navegador fijo */
+.nosotros {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 120px 16px 48px 16px;
+    text-align: center;
+}
+
+.nosotros h1 {
+    margin: 0 0 8px 0;
+    color: #1e3a6e;
+    font-size: 30px;
+}
+
+.nosotros-intro {
+    margin: 0 0 32px 0;
+    color: var(--texto-suave);
+}
+
+/* En el celular, un integrante abajo del otro */
+.integrante {
+    margin-bottom: 32px;
+}
+
+/* El espacio de la foto: el recuadro y la foto usan esta misma clase,
+   así los dos ocupan exactamente el mismo lugar.
+   object-fit: cover recorta la foto para llenar el cuadrado sin deformarla */
+.integrante-foto {
+    display: flex;                     /* para centrar el texto "Foto" en el recuadro */
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 16px auto;          /* auto a los costados: centrado */
+    border: 3px dashed #c5cfe0;        /* borde punteado: "acá va algo" */
+    border-radius: 50%;                /* 50% lo hace un círculo */
+    color: var(--texto-suave);
+    object-fit: cover;
+}
+
+.integrante h3 {
+    margin: 0;
+    color: var(--azul-bs);
+    font-size: 20px;
+}
+
+
 /* ===== PIE ===== */
 
 .pie {
@@ -405,6 +454,17 @@ body {
     .tarjeta {
         margin-bottom: 0;
         min-height: 420px;
+    }
+
+    /* Los 3 integrantes uno al lado del otro */
+    .integrantes {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 32px;
+    }
+
+    .integrante {
+        margin-bottom: 0;
     }
 }
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Bolsillo Sano</title>
+    <link rel="stylesheet" href="css/estilo.css?v=11">  <!-- ?v=11: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+</head>
+<body>
+
+    <!-- Navegador: el mismo de index.html -->
+    <nav class="navegador">
+        <!-- La marca lleva a la portada -->
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
+
+        <div class="menu">
+            <a href="#">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="nosotros.html">Nosotros</a>
+        </div>
+    </nav>
+
+    <!-- ===== NOSOTROS ===== -->
+    <div class="nosotros">
+
+        <h1>Nosotros</h1>
+        <p class="nosotros-intro">Somos el equipo detrás de Bolsillo Sano.</p>
+
+        <!-- Cada integrante: el espacio de la foto y el nombre.
+             Para poner la foto, cambiar el <div class="integrante-foto">...</div> por:
+             <img src="img/diego.png" alt="Diego Lavezzari" class="integrante-foto">
+             La clase es la misma, así la foto ocupa el mismo lugar que el recuadro -->
+        <div class="integrantes">
+
+            <div class="integrante">
+                <div class="integrante-foto">Foto</div>
+                <h3>Diego Lavezzari</h3>
+            </div>
+
+            <div class="integrante">
+                <img src="img/sabrina.png" alt="Sabrina Leal" class="integrante-foto">
+                <h3>Sabrina Leal</h3>
+            </div>
+
+            <div class="integrante">
+                <div class="integrante-foto">Foto</div>
+                <h3>Arturo González</h3>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+    </div>
+
+    <script src="js/nosotros.js"></script>
+</body>
+</html>
