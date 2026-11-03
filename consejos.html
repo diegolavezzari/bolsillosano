@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consejos - Bolsillo Sano</title>
+    <link rel="stylesheet" href="css/estilo.css?v=12">  <!-- ?v=12: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+</head>
+<body>
+
+    <!-- Navegador: el mismo de index.html -->
+    <nav class="navegador">
+        <!-- La marca lleva a la portada -->
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
+
+        <div class="menu">
+            <a href="consejos.html">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="nosotros.html">Nosotros</a>
+        </div>
+    </nav>
+
+    <!-- ===== CONSEJOS ===== -->
+    <div class="consejos">
+
+        <h1>Consejos para tu bolsillo</h1>
+        <p class="consejos-intro">Pequeños hábitos que hacen una gran diferencia a fin de mes.</p>
+
+        <!-- Video de YouTube: se reproduce acá mismo, sin salir de la página.
+             Link original: https://www.youtube.com/watch?v=feZEHKLjMx4
+             Para embeberlo se usa "/embed/" + el ID (lo que viene después de "watch?v=") -->
+        <div class="video">
+            <iframe src="https://www.youtube.com/embed/feZEHKLjMx4"
+                    title="Video de consejos financieros"
+                    allowfullscreen></iframe>
+        </div>
+
+        <!-- Cada consejo: número, título y texto corto -->
+        <div class="lista-consejos">
+
+            <div class="consejo">
+                <span class="consejo-numero">1</span>
+                <h3>Regla 50/30/20</h3>
+                <p>Repartí tus ingresos: 50% para necesidades, 30% para gustos y 20% para ahorro.</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">2</span>
+                <h3>Pagate a vos primero</h3>
+                <p>Apenas cobrás, separá lo que vas a ahorrar. Después gastá lo que queda, no al revés.</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">3</span>
+                <h3>Anotá todos tus gastos</h3>
+                <p>Hasta el café. Los "gastos hormiga" parecen chicos, pero a fin de mes suman mucho.</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">4</span>
+                <h3>Armá un fondo de emergencia</h3>
+                <p>Tené guardados entre 3 y 6 meses de gastos para imprevistos: una rotura, un problema de salud o quedarte sin trabajo.</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">5</span>
+                <h3>Ponete metas concretas</h3>
+                <p>"Ahorrar $200.000 para las vacaciones de diciembre" funciona mejor que "ahorrar más".</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">6</span>
+                <h3>Cuidado con las cuotas</h3>
+                <p>Evitá pagar en cuotas los gastos chicos: comprometen tu sueldo de los próximos meses.</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">7</span>
+                <h3>Pagá el total de la tarjeta</h3>
+                <p>Si pagás solo el mínimo, lo que queda genera intereses muy altos.</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">8</span>
+                <h3>Esperá 24 horas</h3>
+                <p>Antes de una compra que no tenías planeada, dejá pasar un día. Si al otro día la seguís queriendo, compará precios.</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">9</span>
+                <h3>Que la inflación no se coma tus ahorros</h3>
+                <p>No dejes la plata quieta: mirá las opciones de la página <a href="inversiones.html">Inversiones</a>.</p>
+            </div>
+
+            <div class="consejo">
+                <span class="consejo-numero">10</span>
+                <h3>Revisá tus suscripciones</h3>
+                <p>Streaming, apps, gimnasio: cancelá las que no estés usando.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+    </div>
+
+    <script src="js/consejos.js"></script>
+</body>
+</html>
