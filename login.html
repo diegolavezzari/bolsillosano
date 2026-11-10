@@ -4,14 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingresar - Bolsillo Sano</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/estilo.css?v=23">  <!-- ?v=23: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
 </head>
 <body>
 
-    <!-- La misma barra que la bienvenida, así parece la misma app -->
-    <div class="barra-superior">
-        <p class="logo">Bolsillo $ano</p>
-    </div>
+    <!-- Navegador: el mismo de las otras páginas -->
+    <nav class="navegador">
+        <!-- La marca lleva a la portada -->
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
+
+        <div class="menu">
+            <a href="consejos.html">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="nosotros.html">Nosotros</a>
+        </div>
+    </nav>
 
     <div class="login">
         <div class="login-card">
@@ -37,6 +47,9 @@
             <p id="mensaje"></p>
 
             <div class="login-links">
+                <!-- href="#" = no lleva a ninguna página: el JS (login.js) manda el mail
+                     con el link a nueva-password.html -->
+                <p><a href="#" id="link-olvide">¿Olvidaste tu contraseña?</a></p>
                 <p>¿No tenés cuenta? <a href="registro.html">Crear cuenta</a></p>
                 <a href="index.html">← Volver</a>
             </div>
@@ -44,6 +57,11 @@
         </div>
     </div>
 
+    <!-- 1. La librería de Supabase (desde internet) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <!-- 2. Nuestra conexión (usa la librería, por eso va después) -->
+    <script src="js/supabase.js"></script>
+    <!-- 3. El JS de esta página (usa la conexión, por eso va último) -->
     <script src="js/login.js"></script>
 </body>
 </html>

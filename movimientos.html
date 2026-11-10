@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flujo - Bolsillo Sano</title>
+    <link rel="stylesheet" href="css/estilo.css?v=23">  <!-- ?v=23: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+</head>
+<body>
+
+    <!-- Navegador: el mismo de inicio.html y metas.html -->
+    <nav class="navegador">
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
+
+        <div class="menu">
+            <a href="consejos.html">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="nosotros.html">Nosotros</a>
+        </div>
+
+        <button type="button" id="btn-salir" class="boton-ingresar boton-salir" aria-label="Cerrar sesión">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 21H5V3h4"></path>
+                <path d="M16 17l5-5-5-5"></path>
+                <path d="M21 12H9"></path>
+            </svg>
+            <span class="boton-ingresar-texto">Cerrar sesión</span>
+        </button>
+    </nav>
+
+    <div class="movs">
+
+        <h1>Flujo</h1>
+        <!-- El JS pone el nombre del mes (ej: "noviembre de 2026") -->
+        <p class="movs-intro">Lo que entró y salió en <span id="mes-actual"></span>.</p>
+
+        <!-- ===== RESUMEN DEL MES ===== -->
+        <!-- Arrancan en $0: el JS suma los movimientos del mes y cambia los números.
+             Usan los mismos colores que las tarjetas del panel (inicio.html) -->
+        <div class="movs-resumen">
+            <div class="panel-tarjeta panel-saldo">
+                <h2>Ingresos del mes</h2>
+                <p class="panel-numero" id="total-ingresos">$0</p>
+            </div>
+
+            <div class="panel-tarjeta panel-resumen">
+                <h2>Gastos del mes</h2>
+                <p class="panel-numero" id="total-gastos">$0</p>
+            </div>
+
+            <!-- Ingresos − gastos − lo que ya separaste para metas: lo que te queda para ahorrar -->
+            <div class="panel-tarjeta panel-meta">
+                <h2>Te queda para ahorrar</h2>
+                <p class="panel-numero" id="para-ahorrar">$0</p>
+                <!-- Lo que ya pasaste a tus metas este mes (desde metas.html) -->
+                <!-- El JS escribe "Ya separaste $X para tus metas" (o "Sacaste $X de tus metas") -->
+                <p id="texto-ahorrado">Ya separaste $0 para tus metas</p>
+                <a href="metas.html" class="tarjeta-boton">Sumarlo a una meta</a>
+            </div>
+        </div>
+
+
+        <!-- ===== CARGAR UN MOVIMIENTO ===== -->
+        <div class="movs-card">
+            <h2>Cargar un ingreso, un gasto o una compra evitada</h2>
+
+            <div class="movs-campos">
+                <div class="campo">
+                    <label for="tipo">Tipo</label>
+                    <!-- value es lo que se guarda en la base: tiene que ser 'ingreso', 'gasto' o 'evitado'
+                         (la tabla no acepta otra palabra). "Compra evitada" = algo que ibas a comprar
+                         y frenaste: no resta del disponible, se cuenta en "Tu resumen" del inicio -->
+                    <select id="tipo">
+                        <option value="gasto">Gasto</option>
+                        <option value="ingreso">Ingreso</option>
+                        <option value="evitado">Compra evitada</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="monto">Monto ($)</label>
+                    <input type="number" id="monto" min="1" placeholder="32000">
+                </div>
+
+                <div class="campo">
+                    <label for="descripcion">Descripción (opcional)</label>
+                    <input type="text" id="descripcion" placeholder="Ej: Supermercado">
+                </div>
+
+                <div class="campo">
+                    <label for="categoria">Categoría</label>
+                    <!-- Lista fija (recomendado en la sección 14 de la guía).
+                         <optgroup> agrupa las opciones con un título que no se puede elegir -->
+                    <select id="categoria">
+                        <optgroup label="Gastos">
+                            <option>Comida</option>
+                            <option>Transporte</option>
+                            <option>Ropa</option>
+                            <option>Salidas</option>
+                            <option>Servicios</option>
+                        </optgroup>
+                        <optgroup label="Ingresos">
+                            <option>Sueldo</option>
+                            <option>Changas</option>
+                            <option>Regalos</option>
+                        </optgroup>
+                        <option>Otros</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="fecha">Fecha</label>
+                    <!-- El JS le pone la fecha de hoy -->
+                    <input type="date" id="fecha">
+                </div>
+            </div>
+
+            <button type="button" id="btn-guardar" class="boton">Guardar</button>
+
+            <p id="mensaje"></p>
+        </div>
+
+
+        <!-- ===== MOVIMIENTOS DEL MES ===== -->
+        <h2 class="movs-titulo">Movimientos de este mes</h2>
+
+        <!-- El JS arma una fila por cada movimiento acá adentro -->
+        <div class="lista-movs" id="lista-movs"></div>
+
+        <p class="movs-vacio" id="movs-vacio">Todavía no cargaste nada este mes.</p>
+
+        <a href="inicio.html" class="volver">← Volver al inicio</a>
+
+    </div>
+
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+    </div>
+
+    <!-- 1. La librería de Supabase (desde internet) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <!-- 2. Nuestra conexión (usa la librería, por eso va después) -->
+    <script src="js/supabase.js"></script>
+    <!-- 3. El JS de esta página (usa la conexión, por eso va último) -->
+    <script src="js/movimientos.js"></script>
+</body>
+</html>

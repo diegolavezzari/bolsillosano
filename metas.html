@@ -4,35 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis metas - Bolsillo Sano</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/estilo.css?v=23">  <!-- ?v=23: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
 </head>
 <body>
 
+    <!-- Navegador: el mismo de inicio.html (acá también estás adentro, por eso "Cerrar sesión") -->
+    <nav class="navegador">
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
+
+        <div class="menu">
+            <a href="consejos.html">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="nosotros.html">Nosotros</a>
+        </div>
+
+        <button type="button" id="btn-salir" class="boton-ingresar boton-salir" aria-label="Cerrar sesión">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 21H5V3h4"></path>
+                <path d="M16 17l5-5-5-5"></path>
+                <path d="M21 12H9"></path>
+            </svg>
+            <span class="boton-ingresar-texto">Cerrar sesión</span>
+        </button>
+    </nav>
+
     <div class="metas">
 
-        <div class="encabezado">
-            <h1>Mis metas</h1>
-            <p>Estos son tus objetivos de ahorro, Martina.</p>
-        </div>
+        <h1>Mis metas</h1>
+        <p class="metas-intro">Tus objetivos de ahorro y cuánto llevás de cada uno.</p>
 
-        <div class="meta cartel cartel-naranja">
-            <h2>Viaje a Europa</h2>
-            <p>Objetivo: $750.000</p>
-            <p>Ahorrado: $450.000</p>
-            <p>Progreso: 60%</p>
-        </div>
+        <!-- Lo que queda del mes (ingresos − gastos − lo que ya separaste para metas).
+             El JS lo calcula con lo que cargaste en Flujo. De acá sale lo que sumás a cada meta -->
+        <p class="metas-disponible">Este mes te quedan <strong id="disponible-metas">$0</strong> para ahorrar.
+            <a href="movimientos.html">Ver mi flujo</a></p>
 
-        <div class="meta cartel cartel-rosa">
-            <h2>PC nueva</h2>
-            <p>Objetivo: $350.000</p>
-            <p>Ahorrado: $35.000</p>
-            <p>Progreso: 10%</p>
+        <!-- ===== LAS METAS QUE YA TENÉS ===== -->
+        <!-- Arranca vacía: el JS trae tus metas de Supabase y arma una tarjeta por cada una acá adentro -->
+        <div class="lista-metas" id="lista-metas"></div>
+
+        <!-- Mensajes de "Sumar ahorro" y "Borrar" (cerca de las tarjetas, así se ven) -->
+        <p class="metas-mensaje" id="mensaje-lista"></p>
+
+        <!-- Si no tenés ninguna meta, el JS muestra este texto (si tenés, lo oculta) -->
+        <p class="metas-vacio" id="metas-vacio">Todavía no tenés metas. Cargá la primera acá abajo.</p>
+
+
+        <!-- ===== CARGAR METAS NUEVAS ===== -->
+        <!-- 5 lugares, ninguno obligatorio: el JS guarda solo los que tengan nombre y objetivo.
+             Los id terminan en 1, 2, 3, 4, 5 para que el JS los recorra con un for -->
+        <div class="metas-card">
+            <h2>Cargar metas nuevas</h2>
+            <p class="metas-ayuda">Completá las que quieras. Los lugares vacíos no se guardan.</p>
+
+            <div class="meta-fila">
+                <div class="campo">
+                    <label for="meta-nombre-1">Meta 1</label>
+                    <input type="text" id="meta-nombre-1" placeholder="Ej: Viaje a Europa">
+                </div>
+                <div class="campo">
+                    <label for="meta-objetivo-1">Objetivo ($)</label>
+                    <input type="number" id="meta-objetivo-1" min="1" placeholder="750000">
+                </div>
+            </div>
+
+            <div class="meta-fila">
+                <div class="campo">
+                    <label for="meta-nombre-2">Meta 2</label>
+                    <input type="text" id="meta-nombre-2" placeholder="Ej: PC nueva">
+                </div>
+                <div class="campo">
+                    <label for="meta-objetivo-2">Objetivo ($)</label>
+                    <input type="number" id="meta-objetivo-2" min="1" placeholder="350000">
+                </div>
+            </div>
+
+            <div class="meta-fila">
+                <div class="campo">
+                    <label for="meta-nombre-3">Meta 3</label>
+                    <input type="text" id="meta-nombre-3">
+                </div>
+                <div class="campo">
+                    <label for="meta-objetivo-3">Objetivo ($)</label>
+                    <input type="number" id="meta-objetivo-3" min="1">
+                </div>
+            </div>
+
+            <div class="meta-fila">
+                <div class="campo">
+                    <label for="meta-nombre-4">Meta 4</label>
+                    <input type="text" id="meta-nombre-4">
+                </div>
+                <div class="campo">
+                    <label for="meta-objetivo-4">Objetivo ($)</label>
+                    <input type="number" id="meta-objetivo-4" min="1">
+                </div>
+            </div>
+
+            <div class="meta-fila">
+                <div class="campo">
+                    <label for="meta-nombre-5">Meta 5</label>
+                    <input type="text" id="meta-nombre-5">
+                </div>
+                <div class="campo">
+                    <label for="meta-objetivo-5">Objetivo ($)</label>
+                    <input type="number" id="meta-objetivo-5" min="1">
+                </div>
+            </div>
+
+            <button type="button" id="btn-guardar" class="boton">Guardar metas</button>
+
+            <!-- Acá el JS escribe si salió bien o si hubo un error -->
+            <p id="mensaje"></p>
         </div>
 
         <a href="inicio.html" class="volver">← Volver al inicio</a>
 
     </div>
 
-    <script src="js/script.js"></script>
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+    </div>
+
+    <!-- 1. La librería de Supabase (desde internet) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <!-- 2. Nuestra conexión (usa la librería, por eso va después) -->
+    <script src="js/supabase.js"></script>
+    <!-- 3. El JS de esta página (usa la conexión, por eso va último) -->
+    <script src="js/metas.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inversiones - Bolsillo Sano</title>
-    <link rel="stylesheet" href="css/estilo.css?v=12">  <!-- ?v=12: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+    <link rel="stylesheet" href="css/estilo.css?v=23">  <!-- ?v=23: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
 </head>
 <body>
 
@@ -21,6 +21,16 @@
             <a href="inversiones.html">Inversiones</a>
             <a href="nosotros.html">Nosotros</a>
         </div>
+
+        <!-- Botón Ingresar: el ícono es un dibujo SVG (una cabeza y los hombros).
+             aria-label: en el celular el texto no se ve, así los lectores de pantalla igual dicen "Ingresar" -->
+        <a href="login.html" class="boton-ingresar" aria-label="Ingresar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"></circle>
+                <path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path>
+            </svg>
+            <span class="boton-ingresar-texto">Ingresar</span>
+        </a>
     </nav>
 
     <!-- ===== TEST DE PERFIL ===== -->

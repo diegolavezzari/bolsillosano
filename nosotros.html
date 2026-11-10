@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosotros - Bolsillo Sano</title>
-    <link rel="stylesheet" href="css/estilo.css?v=12">  <!-- ?v=12: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+    <link rel="stylesheet" href="css/estilo.css?v=23">  <!-- ?v=23: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
 </head>
 <body>
 
@@ -21,6 +21,16 @@
             <a href="inversiones.html">Inversiones</a>
             <a href="nosotros.html">Nosotros</a>
         </div>
+
+        <!-- Botón Ingresar: el ícono es un dibujo SVG (una cabeza y los hombros).
+             aria-label: en el celular el texto no se ve, así los lectores de pantalla igual dicen "Ingresar" -->
+        <a href="login.html" class="boton-ingresar" aria-label="Ingresar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"></circle>
+                <path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path>
+            </svg>
+            <span class="boton-ingresar-texto">Ingresar</span>
+        </a>
     </nav>
 
     <!-- ===== NOSOTROS ===== -->
@@ -31,17 +41,17 @@
 
         <!-- Cada integrante: el espacio de la foto y el nombre.
              Para poner la foto, cambiar el <div class="integrante-foto">...</div> por:
-             <img src="img/diego.png" alt="Diego Lavezzari" class="integrante-foto">
+             <img src="img/diego.jpg" alt="Diego Lavezzari" class="integrante-foto">
              La clase es la misma, así la foto ocupa el mismo lugar que el recuadro -->
         <div class="integrantes">
 
             <div class="integrante">
-                <img src="img/diego.png" alt="Diego Lavezzari" class="integrante-foto">
+                <img src="img/diego.jpg" alt="Diego Lavezzari" class="integrante-foto">
                 <h3>Diego Lavezzari</h3>
             </div>
 
             <div class="integrante">
-                <img src="img/sabrina.png" alt="Sabrina Leal" class="integrante-foto">
+                <img src="img/sabrina.jpg" alt="Sabrina Leal" class="integrante-foto">
                 <h3>Sabrina Leal</h3>
             </div>
 

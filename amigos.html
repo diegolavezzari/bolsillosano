@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis amigos - Bolsillo Sano</title>
+    <link rel="stylesheet" href="css/estilo.css?v=23">  <!-- ?v=23: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+</head>
+<body>
+
+    <!-- Navegador: el mismo de inicio.html -->
+    <nav class="navegador">
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
+
+        <div class="menu">
+            <a href="consejos.html">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="nosotros.html">Nosotros</a>
+        </div>
+
+        <button type="button" id="btn-salir" class="boton-ingresar boton-salir" aria-label="Cerrar sesión">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 21H5V3h4"></path>
+                <path d="M16 17l5-5-5-5"></path>
+                <path d="M21 12H9"></path>
+            </svg>
+            <span class="boton-ingresar-texto">Cerrar sesión</span>
+        </button>
+    </nav>
+
+    <div class="social">
+
+        <h1>Mis amigos</h1>
+        <p class="social-intro">Tu tribunal: los amigos que opinan antes de que hagas una compra impulsiva.
+            Solo ven tu nombre y las compras que les consultás. Tus metas y tu flujo siguen siendo privados.</p>
+
+        <!-- ===== INVITAR ===== -->
+        <div class="social-card">
+            <h2>Invitar a un amigo</h2>
+            <p class="social-ayuda">Escribí el mail con el que se registró en Bolsillo Sano.
+                Si todavía no tiene cuenta, la invitación lo espera hasta que se registre con ese mail.</p>
+
+            <div class="campo">
+                <label for="email-amigo">Mail de tu amigo</label>
+                <input type="email" id="email-amigo" placeholder="amigo@email.com">
+            </div>
+
+            <button type="button" id="btn-invitar" class="boton">Invitar</button>
+
+            <p id="mensaje"></p>
+        </div>
+
+        <!-- ===== LAS 3 LISTAS ===== -->
+        <!-- Arrancan vacías: el JS trae los vínculos de Supabase y los reparte en cada lista -->
+
+        <h2 class="social-titulo">Invitaciones que te llegaron</h2>
+        <div id="lista-recibidas"></div>
+        <p class="social-vacio" id="recibidas-vacio">No tenés invitaciones nuevas.</p>
+
+        <h2 class="social-titulo">Tu tribunal</h2>
+        <div id="lista-amigos"></div>
+        <p class="social-vacio" id="amigos-vacio">Todavía no tenés amigos en tu tribunal. Invitá a alguien arriba.</p>
+
+        <h2 class="social-titulo">Invitaciones que mandaste</h2>
+        <div id="lista-enviadas"></div>
+        <p class="social-vacio" id="enviadas-vacio">No tenés invitaciones esperando respuesta.</p>
+
+        <div class="social-links">
+            <a href="tribunal.html" class="volver">Ir al tribunal →</a>
+            <a href="inicio.html" class="volver">← Volver al inicio</a>
+        </div>
+
+    </div>
+
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+    </div>
+
+    <!-- 1. La librería de Supabase (desde internet) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <!-- 2. Nuestra conexión (usa la librería, por eso va después) -->
+    <script src="js/supabase.js"></script>
+    <!-- 3. El JS de esta página (usa la conexión, por eso va último) -->
+    <script src="js/amigos.js"></script>
+</body>
+</html>

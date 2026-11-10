@@ -25,6 +25,13 @@
     box-sizing: border-box;
 }
 
+/* Lo que tiene el atributo hidden (el JS lo usa para ocultar cosas) no se ve nunca,
+   aunque su clase le ponga display: block o flex.
+   !important = gana sobre cualquier otra regla */
+[hidden] {
+    display: none !important;
+}
+
 body {
     margin: 0;                         /* saca el margen que trae el navegador */
     font-family: Arial, sans-serif;
@@ -48,10 +55,11 @@ body {
     border-radius: 40px;               /* puntas redondeadas, forma de pastilla */
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s;        /* que suba y baje suave, no de golpe */
-    padding: 0 24px;                   /* separa el logo del borde redondeado */
+    padding: 0 16px;                   /* separa el logo del borde redondeado (en la compu, 24px) */
     display: flex;                     /* pone lo de adentro en fila */
     align-items: center;               /* y lo centra de arriba a abajo */
     justify-content: space-between;    /* la marca a la izquierda, el menú a la derecha */
+    gap: 10px;                         /* espacio mínimo entre logo, menú y botón (que no se peguen en el celular) */
 }
 
 /* Marca: logo + nombre, uno al lado del otro */
@@ -73,23 +81,56 @@ body {
     font-size: 22px;
     font-weight: bold;
     display: none;                     /* en el celular no entra junto al menú: se ve solo el logo */
+    white-space: nowrap;               /* "Bolsillo Sano" siempre en un renglón */
 }
 
 /* Menú: los 3 links en fila */
 .menu {
     display: flex;
-    gap: 12px;                         /* espacio entre un link y otro */
+    gap: 10px;                         /* espacio entre un link y otro */
 }
 
 .menu a {
     color: var(--azul-bs);
-    font-size: 14px;
+    font-size: 13px;                   /* chico en el celular para que entren los 3 + el botón */
     font-weight: bold;
     text-decoration: none;             /* saca el subrayado que traen los links */
 }
 
 .menu a:hover {
     color: var(--verde-bs);            /* cambia de color al pasar el mouse */
+}
+
+/* Botón "Ingresar" a la derecha del navegador.
+   En el celular se ve solo el ícono (no entra el texto); en la compu, ícono + texto */
+.boton-ingresar {
+    display: flex;
+    align-items: center;
+    gap: 8px;                          /* espacio entre el ícono y el texto */
+    padding: 8px;
+    color: white;
+    background-color: var(--verde-bs);
+    border-radius: 40px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.boton-ingresar:hover {
+    background-color: var(--azul-bs);
+}
+
+/* El ícono de la persona es un dibujo SVG: se pinta con estas propiedades.
+   currentColor = el mismo color del texto (blanco) */
+.boton-ingresar svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.boton-ingresar-texto {
+    display: none;                     /* en el celular, solo el ícono */
 }
 
 /* El JS le pone esta clase cuando bajás: la barra sube y sale de la pantalla */
@@ -483,6 +524,745 @@ body {
 }
 
 
+/* ===== LOGIN Y REGISTRO (login.html, registro.html) ===== */
+
+/* Las dos páginas usan las mismas clases: misma tarjeta, mismos campos.
+   El padding de arriba deja lugar al navegador fijo */
+.login {
+    padding: 120px 16px 48px 16px;
+}
+
+/* Tarjeta blanca centrada con borde suave y sombra.
+   max-width: un formulario muy ancho es incómodo de leer, por eso no ocupa
+   toda la pantalla aunque sea una compu */
+.login-card {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    border: 2px solid #e3e8f0;
+    border-radius: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.login-logo {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.login-logo h1 {
+    margin: 0 0 8px 0;
+    color: #1e3a6e;
+    font-size: 28px;
+}
+
+.login-logo p {
+    margin: 0;
+    color: var(--texto-suave);
+}
+
+/* Cada campo: la etiqueta arriba y la caja de texto abajo */
+.campo {
+    margin-bottom: 16px;
+}
+
+.campo label {
+    display: block;                    /* así la etiqueta queda en su propio renglón */
+    margin-bottom: 6px;
+    color: var(--azul-bs);
+    font-weight: bold;
+}
+
+/* width: 100% ocupa todo el ancho de la tarjeta.
+   font-size: 16px evita que el iPhone haga zoom solo al tocar el campo */
+.campo input,
+.campo select {                        /* los <select> (listas para elegir) se ven igual que los campos */
+    width: 100%;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 16px;
+    border: 2px solid #e3e8f0;
+    border-radius: 14px;
+    outline: none;                     /* saca el borde azul que pone el navegador... */
+}
+
+/* ...y en su lugar el borde se pone verde mientras escribís (:focus) */
+.campo input:focus,
+.campo select:focus {
+    border-color: var(--verde-bs);
+}
+
+/* El botón ocupa todo el ancho de la tarjeta */
+.login-card .boton {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* Mensaje que escribe el JS (si falta un dato, o "Te mandamos un mail").
+   Si está vacío no se ve nada */
+#mensaje {
+    margin: 16px 0 0 0;
+    color: var(--azul-bs);
+    font-weight: bold;
+    text-align: center;
+}
+
+.login-links {
+    margin-top: 24px;
+    text-align: center;
+    color: var(--texto-suave);
+}
+
+.login-links a {
+    color: var(--verde-bs);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* ===== PANEL DEL USUARIO (inicio.html) ===== */
+
+/* "Cerrar sesión" usa el estilo de .boton-ingresar, pero es un <button>:
+   los botones traen borde, letra y tamaño propios. Acá se los sacamos */
+.boton-salir {
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Columna centrada. El padding de arriba deja lugar al navegador fijo */
+.panel {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 16px 48px 16px;
+}
+
+.panel h1 {
+    margin: 0 0 8px 0;
+    color: #1e3a6e;
+    font-size: 30px;
+}
+
+/* El nombre en verde, para que se destaque del "Hola," */
+#nombre-usuario {
+    color: var(--verde-bs);
+}
+
+.panel-intro {
+    margin: 0 0 32px 0;
+    color: var(--texto-suave);
+}
+
+/* Cada tarjeta, como las de la portada: degradé, texto blanco, puntas redondeadas.
+   En el celular, una abajo de la otra */
+.panel-tarjeta {
+    margin-bottom: 16px;
+    padding: 28px 24px;
+    color: white;
+    border-radius: 24px;
+}
+
+/* Mismos degradés que las tarjetas de la portada */
+.panel-saldo   { background: linear-gradient(160deg, var(--verde-bs), #12604a); }
+.panel-meta    { background: linear-gradient(110deg, var(--verde-bs), var(--azul-bs)); }
+.panel-resumen { background: linear-gradient(160deg, var(--azul-noche), var(--azul-bs)); }
+
+.panel-tarjeta h2 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: normal;               /* el título chico y suave; lo fuerte es el dato */
+}
+
+.panel-tarjeta h3 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+}
+
+.panel-tarjeta p {
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+/* El monto disponible, bien grande */
+.panel-numero {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* Barra de progreso: el fondo es blanco transparente (rgba con 0.25)... */
+.barra {
+    height: 14px;
+    margin-top: 16px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 40px;
+    overflow: hidden;                  /* que el relleno respete las puntas redondeadas */
+}
+
+/* ...y el relleno es turquesa. width: 0% = vacía (todavía no hay meta).
+   Cuando haya datos, el JS le cambia el ancho según cuánto se ahorró */
+.barra-relleno {
+    width: 0%;
+    height: 100%;
+    background-color: var(--turquesa);
+    border-radius: 40px;
+}
+
+.barra-texto {
+    margin-top: 6px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* "Ver mis metas" y "Ver mi flujo" usan el estilo de los botones de las tarjetas (.tarjeta-boton).
+   Como son <a>, hay que sacarles el subrayado y hacerlos "caja" */
+.panel-tarjeta .tarjeta-boton {
+    display: inline-block;
+    margin-top: 8px;
+    text-decoration: none;
+}
+
+/* Cada meta adentro de la tarjeta "Tus metas" (las arma el JS).
+   Una línea finita abajo las separa entre sí */
+.meta-mini {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.meta-mini h3 {
+    font-size: 20px;
+}
+
+.meta-mini p {
+    margin: 0;
+}
+
+/* La barra de cada meta un poco más pegada al nombre que la del panel */
+.meta-mini .barra {
+    margin-top: 10px;
+}
+
+/* Tarjeta del tribunal en el inicio: degradé azul → verde (al revés que la de metas) */
+.panel-tribunal {
+    background: linear-gradient(110deg, var(--azul-bs), var(--verde-bs));
+}
+
+.panel-tribunal .tarjeta-boton {
+    margin-right: 8px;
+}
+
+/* Aviso "Tenés N consultas del tribunal": franja turquesa arriba de las tarjetas */
+.aviso-tribunal {
+    display: block;
+    margin: 0 0 24px 0;
+    padding: 14px 20px;
+    color: white;
+    background-color: var(--turquesa);
+    border-radius: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.aviso-tribunal:hover {
+    background-color: var(--verde-bs);
+}
+
+/* "Borrar mi cuenta": abajo de todo, separado por una línea, chico y gris.
+   Recién al pasar el mouse se pone rojo: es una acción peligrosa y no tiene que llamar la atención */
+.zona-borrar {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e3e8f0;
+    text-align: center;
+}
+
+.boton-borrar {
+    padding: 6px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--texto-suave);
+    background-color: transparent;
+    border: 1px solid #e3e8f0;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.boton-borrar:hover {
+    color: #c0392b;                    /* el mismo rojo que .aviso */
+    border-color: #c0392b;
+}
+
+
+/* ===== METAS (metas.html) ===== */
+
+/* Columna centrada, como el panel. El padding de arriba deja lugar al navegador fijo */
+.metas {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 16px 48px 16px;
+}
+
+.metas h1 {
+    margin: 0 0 8px 0;
+    color: #1e3a6e;
+    font-size: 30px;
+}
+
+.metas-intro {
+    margin: 0 0 32px 0;
+    color: var(--texto-suave);
+}
+
+/* "Este mes te quedan $X para ahorrar" */
+.metas-disponible {
+    margin: -16px 0 32px 0;            /* negativo: lo acerca a la frase de arriba */
+    color: var(--azul-bs);
+}
+
+.metas-disponible a {
+    margin-left: 8px;
+    color: var(--verde-bs);
+    font-weight: bold;
+}
+
+.metas-vacio {
+    margin: 0 0 32px 0;
+    color: var(--azul-bs);
+    font-weight: bold;
+}
+
+/* Mensaje de "Sumar ahorro" y "Borrar". Si está vacío no se ve */
+.metas-mensaje {
+    margin: 0 0 24px 0;
+    color: var(--azul-bs);
+    font-weight: bold;
+}
+
+/* Cada meta: tarjeta con el mismo degradé que la meta del panel.
+   En el celular, una abajo de la otra */
+.meta-tarjeta {
+    margin-bottom: 16px;
+    padding: 24px;
+    color: white;
+    background: linear-gradient(110deg, var(--verde-bs), var(--azul-bs));
+    border-radius: 24px;
+}
+
+.meta-tarjeta h3 {
+    margin: 0 0 8px 0;
+    font-size: 22px;
+}
+
+.meta-tarjeta p {
+    margin: 0;
+}
+
+/* Campo del monto + botones "Sumar ahorro" y "Borrar", en fila.
+   flex-wrap: si no entran en un renglón, bajan al siguiente */
+.meta-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* El campo del monto: blanco transparente sobre el degradé.
+   font-size: 16px para que el iPhone no haga zoom */
+.meta-acciones input {
+    width: 130px;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 16px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2px solid white;
+    border-radius: 40px;
+    outline: none;
+}
+
+/* El texto de ejemplo ("Monto") un poco transparente */
+.meta-acciones input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* "Borrar" más suave que "Sumar ahorro": borde transparente,
+   para que no se toque sin querer */
+.meta-borrar {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Tarjeta blanca para cargar las metas nuevas (como la del login, pero más ancha) */
+.metas-card {
+    margin-top: 16px;
+    padding: 32px 24px;
+    border: 2px solid #e3e8f0;
+    border-radius: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.metas-card h2 {
+    margin: 0 0 8px 0;
+    color: #1e3a6e;
+    font-size: 22px;
+}
+
+.metas-ayuda {
+    margin: 0 0 24px 0;
+    color: var(--texto-suave);
+}
+
+/* En el celular, cada meta ocupa su renglón y queda una línea entre una y otra */
+.meta-fila {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e3e8f0;
+}
+
+.metas-card .boton {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 24px;
+    color: var(--verde-bs);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.volver:hover {
+    text-decoration: underline;
+}
+
+
+/* ===== FLUJO (movimientos.html) ===== */
+
+/* Columna centrada, como el panel y las metas */
+.movs {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 16px 48px 16px;
+}
+
+.movs h1 {
+    margin: 0 0 8px 0;
+    color: #1e3a6e;
+    font-size: 30px;
+}
+
+.movs-intro {
+    margin: 0 0 32px 0;
+    color: var(--texto-suave);
+}
+
+/* "Sumarlo a una meta" es un <a>: sin subrayado y como "caja" */
+.movs-resumen .tarjeta-boton {
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* Tarjeta blanca del formulario (como la de metas) */
+.movs-card {
+    margin-top: 16px;
+    padding: 32px 24px;
+    border: 2px solid #e3e8f0;
+    border-radius: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.movs-card h2,
+.movs-titulo {
+    margin: 0 0 24px 0;
+    color: #1e3a6e;
+    font-size: 22px;
+}
+
+.movs-card .boton {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.movs-titulo {
+    margin-top: 40px;
+}
+
+.movs-vacio {
+    color: var(--texto-suave);
+}
+
+/* Cada movimiento: datos a la izquierda, monto y Borrar a la derecha.
+   flex + align-items: center los pone en fila y centrados de arriba a abajo */
+.mov-fila {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e3e8f0;
+}
+
+/* flex: 1 = los datos ocupan todo el lugar que sobra, así el monto queda a la derecha */
+.mov-fila div {
+    flex: 1;
+}
+
+.mov-fila p {
+    margin: 0;
+}
+
+.mov-titulo {
+    color: var(--azul-bs);
+    font-weight: bold;
+}
+
+.mov-detalle {
+    margin-top: 4px;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+.mov-monto {
+    font-weight: bold;
+    white-space: nowrap;               /* "+ $32.000" siempre en un renglón */
+}
+
+.mov-ingreso {
+    color: var(--verde-bs);
+}
+
+.mov-gasto {
+    color: #c0392b;                    /* el mismo rojo que .aviso */
+}
+
+.mov-evitado {
+    color: var(--azul-bs);             /* ni verde ni rojo: no entró ni salió plata */
+}
+
+.mov-ahorro {
+    color: var(--turquesa);            /* el mismo color que las barras de las metas */
+}
+
+/* Botón chico y suave: es una acción secundaria */
+.mov-borrar {
+    padding: 6px 12px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--texto-suave);
+    background-color: transparent;
+    border: 1px solid #e3e8f0;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.mov-borrar:hover {
+    color: #c0392b;
+    border-color: #c0392b;
+}
+
+
+/* ===== AMIGOS Y TRIBUNAL (amigos.html, tribunal.html) ===== */
+
+/* Columna centrada, como el panel. max-width más chico: son listas, no tarjetas en fila */
+.social {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 120px 16px 48px 16px;
+}
+
+.social h1 {
+    margin: 0 0 8px 0;
+    color: #1e3a6e;
+    font-size: 30px;
+}
+
+.social-intro {
+    margin: 0 0 32px 0;
+    color: var(--texto-suave);
+    line-height: 1.4;
+}
+
+/* Aviso amarillo suave: "todavía no tenés amigos" */
+.social-aviso {
+    margin: 0 0 24px 0;
+    padding: 14px 18px;
+    color: #7a5a00;
+    background-color: #fff6d6;
+    border-radius: 14px;
+}
+
+.social-aviso a {
+    color: var(--verde-bs);
+    font-weight: bold;
+}
+
+/* Tarjeta blanca del formulario (como la de Flujo) */
+.social-card {
+    padding: 32px 24px;
+    border: 2px solid #e3e8f0;
+    border-radius: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.social-card h2,
+.social-titulo {
+    margin: 0 0 12px 0;
+    color: #1e3a6e;
+    font-size: 22px;
+}
+
+.social-titulo {
+    margin-top: 40px;
+}
+
+.social-ayuda {
+    margin: 0 0 20px 0;
+    color: var(--texto-suave);
+    line-height: 1.4;
+}
+
+.social-card .boton {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.social-vacio {
+    color: var(--texto-suave);
+}
+
+/* Fila de amigos / invitaciones: datos a la izquierda, botones a la derecha */
+.social-fila {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e3e8f0;
+}
+
+/* flex: 1 = los datos ocupan todo el lugar que sobra, así los botones quedan a la derecha */
+.social-datos {
+    flex: 1;
+}
+
+.social-fila p,
+.social-item p {
+    margin: 0;
+}
+
+.social-nombre {
+    color: var(--azul-bs);
+    font-weight: bold;
+}
+
+.social-detalle {
+    margin-top: 4px;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+/* Tarjeta de cada consulta del tribunal */
+.social-item {
+    margin-bottom: 16px;
+    padding: 20px;
+    border: 2px solid #e3e8f0;
+    border-radius: 20px;
+}
+
+.social-item h3 {
+    margin: 4px 0;
+    color: var(--azul-bs);
+    font-size: 20px;
+}
+
+.social-monto {
+    color: var(--verde-bs);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.social-cuenta,
+.social-mi-voto,
+.social-decision {
+    margin-top: 12px !important;       /* gana sobre el margin: 0 de .social-item p */
+    color: var(--azul-bs);
+    font-weight: bold;
+}
+
+/* Lista de votos: sin viñetas, uno por renglón */
+.social-votos {
+    margin: 8px 0 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--texto-suave);
+    line-height: 1.6;
+}
+
+/* Campo del comentario al votar. font-size: 16px para que el iPhone no haga zoom */
+.social-comentario {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 16px;
+    border: 2px solid #e3e8f0;
+    border-radius: 14px;
+    outline: none;
+}
+
+.social-comentario:focus {
+    border-color: var(--verde-bs);
+}
+
+/* Botones en fila; si no entran, bajan al renglón siguiente (flex-wrap) */
+.social-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* Botón chico verde (Aceptar, votar, No la compro) */
+.boton-chico {
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--verde-bs);
+    border: 2px solid var(--verde-bs);
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.boton-chico:hover {
+    background-color: var(--azul-bs);
+    border-color: var(--azul-bs);
+}
+
+/* Versión suave (Rechazar, Borrar, Desvincular): solo borde gris */
+.boton-chico-gris {
+    color: var(--texto-suave);
+    background-color: transparent;
+    border-color: #e3e8f0;
+}
+
+.boton-chico-gris:hover {
+    color: #c0392b;
+    background-color: transparent;
+    border-color: #c0392b;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+
 /* ===== PIE ===== */
 
 .pie {
@@ -500,7 +1280,20 @@ body {
 @media (min-width: 768px) {
 
     /* En el monitor hay lugar: se muestra el nombre y el menú más grande */
+    .navegador {
+        padding: 0 24px;
+    }
+
     .marca-nombre {
+        display: inline;
+    }
+
+    /* El botón Ingresar muestra también el texto */
+    .boton-ingresar {
+        padding: 10px 20px;
+    }
+
+    .boton-ingresar-texto {
         display: inline;
     }
 
@@ -509,7 +1302,7 @@ body {
     }
 
     .menu {
-        gap: 40px;
+        gap: 28px;                     /* en 1024px o más sube a 40px */
     }
 
     .menu a {
@@ -576,6 +1369,79 @@ body {
     .consejo {
         margin-bottom: 0;
     }
+
+    /* Panel: las 3 tarjetas una al lado de la otra.
+       La de la meta es más ancha (2fr = el doble que las otras) porque tiene más contenido */
+    .panel-tarjetas {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 16px;
+    }
+
+    .panel-tarjeta {
+        margin-bottom: 0;
+    }
+
+    /* La tarjeta del tribunal va abajo y ocupa las 3 columnas (de la primera a la última línea) */
+    .panel-tribunal {
+        grid-column: 1 / -1;
+    }
+
+    /* En la compu el botón del formulario no ocupa todo el ancho */
+    .social-card .boton {
+        width: auto;
+    }
+
+    /* Metas: una tarjeta por fila, a todo el ancho, así el monto y los 3 botones
+       (Sumar ahorro, Restar ahorro, Borrar meta) entran en el mismo renglón.
+       (De a dos por fila cada tarjeta quedaba angosta y "Borrar meta" bajaba) */
+    .lista-metas {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+
+    .meta-tarjeta {
+        margin-bottom: 0;
+    }
+
+    /* Cada meta nueva en un renglón: el nombre más ancho que el objetivo (2fr y 1fr) */
+    .meta-fila {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 16px;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    /* En la compu el botón no ocupa todo el ancho */
+    .metas-card .boton {
+        width: auto;
+    }
+
+    /* Flujo: las 3 tarjetas del resumen una al lado de la otra, iguales */
+    .movs-resumen {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+    }
+
+    .movs-resumen .panel-tarjeta {
+        margin-bottom: 0;
+    }
+
+    /* Los campos del formulario de a dos por fila */
+    .movs-campos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 16px;
+    }
+
+    .movs-card .boton {
+        width: auto;
+    }
 }
 
 
@@ -589,6 +1455,7 @@ body {
        left: 50% pone su borde izquierdo en la mitad, y
        translateX(-50%) lo corre para atrás la mitad de su ancho: queda centrado */
     .menu {
+        gap: 40px;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);

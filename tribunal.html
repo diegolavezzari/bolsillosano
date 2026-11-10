@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribunal de amigos - Bolsillo Sano</title>
+    <link rel="stylesheet" href="css/estilo.css?v=23">  <!-- ?v=23: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+</head>
+<body>
+
+    <!-- Navegador: el mismo de inicio.html -->
+    <nav class="navegador">
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
+
+        <div class="menu">
+            <a href="consejos.html">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="nosotros.html">Nosotros</a>
+        </div>
+
+        <button type="button" id="btn-salir" class="boton-ingresar boton-salir" aria-label="Cerrar sesión">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 21H5V3h4"></path>
+                <path d="M16 17l5-5-5-5"></path>
+                <path d="M21 12H9"></path>
+            </svg>
+            <span class="boton-ingresar-texto">Cerrar sesión</span>
+        </button>
+    </nav>
+
+    <div class="social">
+
+        <h1>Tribunal de amigos</h1>
+        <p class="social-intro">¿Estás por hacer una compra y no sabés si la necesitás?
+            Consultala con tu tribunal: tus amigos votan y vos decidís.</p>
+
+        <!-- Si no tenés amigos aceptados, el JS muestra este aviso (nadie podría votar) -->
+        <p class="social-aviso" id="aviso-sin-amigos" hidden>
+            Todavía no tenés amigos en tu tribunal: nadie va a poder votar.
+            <a href="amigos.html">Invitá a alguien</a>.
+        </p>
+
+        <!-- ===== CONSULTAR UNA COMPRA ===== -->
+        <div class="social-card">
+            <h2>Consultar una compra</h2>
+
+            <div class="movs-campos">
+                <div class="campo">
+                    <label for="descripcion">¿Qué querés comprar?</label>
+                    <input type="text" id="descripcion" placeholder="Ej: Zapatillas Urban">
+                </div>
+
+                <div class="campo">
+                    <label for="monto">¿Cuánto sale? ($)</label>
+                    <input type="number" id="monto" min="1" placeholder="85000">
+                </div>
+            </div>
+
+            <button type="button" id="btn-consultar" class="boton">Mandar al tribunal</button>
+
+            <p id="mensaje"></p>
+        </div>
+
+        <!-- ===== PARA VOTAR (las compras de mis amigos) ===== -->
+        <h2 class="social-titulo">Para votar</h2>
+        <p class="social-ayuda">Las compras que consultaron tus amigos. ¿La necesita o se está tentando?</p>
+        <div id="lista-votar"></div>
+        <p class="social-vacio" id="votar-vacio">No hay compras de tus amigos esperando tu voto.</p>
+
+        <!-- ===== MIS CONSULTAS ===== -->
+        <h2 class="social-titulo">Tus consultas</h2>
+        <div id="lista-mias"></div>
+        <p class="social-vacio" id="mias-vacio">Todavía no consultaste ninguna compra.</p>
+
+        <div class="social-links">
+            <a href="amigos.html" class="volver">Mis amigos →</a>
+            <a href="inicio.html" class="volver">← Volver al inicio</a>
+        </div>
+
+    </div>
+
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+    </div>
+
+    <!-- 1. La librería de Supabase (desde internet) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <!-- 2. Nuestra conexión (usa la librería, por eso va después) -->
+    <script src="js/supabase.js"></script>
+    <!-- 3. El JS de esta página (usa la conexión, por eso va último) -->
+    <script src="js/tribunal.js"></script>
+</body>
+</html>

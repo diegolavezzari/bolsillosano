@@ -4,38 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - Bolsillo Sano</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/estilo.css?v=23">  <!-- ?v=23: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
 </head>
 <body>
 
-    <div class="inicio">
+    <!-- Navegador: el mismo de las otras páginas, pero en vez de "Ingresar"
+         va "Cerrar sesión" (acá ya estás adentro) -->
+    <nav class="navegador">
+        <a href="index.html" class="marca">
+            <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
+            <span class="marca-nombre">Bolsillo Sano</span>
+        </a>
 
-        <div class="encabezado">
-            <h1>Bolsillo Sano</h1>
-            <p>Hola, Martina</p>
+        <div class="menu">
+            <a href="consejos.html">Consejos</a>
+            <a href="inversiones.html">Inversiones</a>
+            <a href="nosotros.html">Nosotros</a>
         </div>
 
-        <div class="saldo cartel cartel-verde">
-            <h2>Disponible este mes</h2>
-            <p>$375.000</p>
+        <!-- Es un <button> y no un <a>: no lleva a una página, hace una acción (el JS cierra la sesión).
+             Usa el mismo estilo que el botón Ingresar. El ícono es una puerta con una flecha saliendo -->
+        <button type="button" id="btn-salir" class="boton-ingresar boton-salir" aria-label="Cerrar sesión">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 21H5V3h4"></path>
+                <path d="M16 17l5-5-5-5"></path>
+                <path d="M21 12H9"></path>
+            </svg>
+            <span class="boton-ingresar-texto">Cerrar sesión</span>
+        </button>
+    </nav>
+
+    <!-- ===== PANEL DEL USUARIO ===== -->
+    <!-- Arranca VACÍO: los datos los carga cada usuario (en metas.html y movimientos.html) y se guardan en Supabase.
+         Los id son los lugares donde el JS después "vuelca" esos datos -->
+    <div class="panel">
+
+        <!-- El <span> queda vacío: el JS pone el nombre de quien se registró -->
+        <h1>Hola, <span id="nombre-usuario"></span></h1>
+        <p class="panel-intro">Así viene tu mes.</p>
+
+        <!-- Aviso del tribunal: oculto (hidden) hasta que el JS encuentra compras de tus amigos
+             que todavía no votaste. Ahí lo muestra con el número: "Tenés 2 consultas del tribunal" -->
+        <a href="tribunal.html" class="aviso-tribunal" id="aviso-tribunal" hidden></a>
+
+        <div class="panel-tarjetas">
+
+            <!-- Ingresos − gastos del mes: el JS lo calcula con lo que cargaste en Flujo -->
+            <div class="panel-tarjeta panel-saldo">
+                <h2>Disponible este mes</h2>
+                <p class="panel-numero" id="disponible">$0</p>
+                <a href="movimientos.html" class="tarjeta-boton">Ver mi flujo</a>
+            </div>
+
+            <!-- Todas tus metas, cada una con su barra. El JS arma una por cada meta adentro de "lista-metas".
+                 Si no tenés ninguna, se ve el texto de "metas-vacio" -->
+            <div class="panel-tarjeta panel-meta">
+                <h2>Tus metas</h2>
+
+                <div id="lista-metas"></div>
+
+                <div id="metas-vacio">
+                    <h3>Todavía no tenés metas</h3>
+                    <p>Creá una y acá vas a ver cuánto llevás ahorrado.</p>
+                </div>
+
+                <!-- El JS cambia el texto a "Ver mis metas" cuando ya tenés alguna -->
+                <a href="metas.html" class="tarjeta-boton" id="link-metas">Crear una meta</a>
+            </div>
+
+            <div class="panel-tarjeta panel-resumen">
+                <h2>Tu resumen</h2>
+                <p>Compras impulsivas evitadas: <strong id="compras-evitadas">0</strong></p>
+                <p>Dinero protegido: <strong id="dinero-protegido">$0</strong></p>
+            </div>
+
+            <!-- Tribunal de amigos: en la compu ocupa todo el ancho, abajo de las otras 3 -->
+            <div class="panel-tarjeta panel-tribunal">
+                <h2>Tribunal de amigos</h2>
+                <p>¿Te tienta una compra? Consultala con tus amigos antes de decidir.</p>
+                <a href="tribunal.html" class="tarjeta-boton">Ir al tribunal</a>
+                <a href="amigos.html" class="tarjeta-boton">Mis amigos</a>
+            </div>
+
         </div>
 
-        <div class="meta cartel cartel-naranja">
-            <h2>Tu meta principal</h2>
-            <h3>Viaje a Europa</h3>
-            <p>Ahorraste $450.000 de $750.000</p>
-            <p>Progreso: 60%</p>
-            <a href="metas.html">Ver mis metas</a>
+        <!-- Borrar mi cuenta: abajo de todo y poco llamativo, para que nadie lo toque sin querer.
+             Borra el usuario y TODOS sus datos (metas, flujo). Pide confirmación antes -->
+        <div class="zona-borrar">
+            <button type="button" id="btn-borrar-cuenta" class="boton-borrar">Borrar mi cuenta</button>
         </div>
-
-        <div class="resumen cartel cartel-violeta">
-            <h2>Tu resumen</h2>
-            <p>Compras impulsivas evitadas: 12</p>
-            <p>Dinero protegido: $80.000</p>
-        </div>
-
     </div>
 
-    <script src="js/script.js"></script>
+    <div class="pie">
+        <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
+    </div>
+
+    <!-- 1. La librería de Supabase (desde internet) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <!-- 2. Nuestra conexión (usa la librería, por eso va después) -->
+    <script src="js/supabase.js"></script>
+    <!-- 3. El JS de esta página (usa la conexión, por eso va último) -->
+    <script src="js/inicio.js"></script>
 </body>
 </html>
