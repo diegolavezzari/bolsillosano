@@ -389,7 +389,7 @@ body {
 .nosotros h1 {
     margin: 0 0 8px 0;
     color: #1e3a6e;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .nosotros-intro {
@@ -422,6 +422,64 @@ body {
     margin: 0;
     color: var(--azul-bs);
     font-size: 20px;
+}
+
+/* Ícono de LinkedIn abajo del nombre */
+.integrante-linkedin {
+    display: inline-block;
+    margin-top: 10px;
+    transition: transform 0.2s;        /* que se agrande suave */
+}
+
+.integrante-linkedin:hover {
+    transform: scale(1.15);            /* al pasar el mouse se agranda un poco */
+}
+
+.integrante-linkedin img {
+    display: block;
+    width: 32px;
+    height: 32px;
+}
+
+/* Carátula de la materia: tarjeta centrada, como la tapa de un TP */
+.caratula {
+    max-width: 640px;
+    margin: 48px auto 0 auto;          /* 48px arriba: la separa de las fotos; auto a los costados: centrada */
+    padding: 32px 24px;
+    border: 1px solid #c5cfe0;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.caratula-institucion {
+    margin: 0 0 8px 0;
+    color: var(--texto-suave);
+    text-transform: uppercase;         /* en mayúsculas, como en una carátula */
+    letter-spacing: 2px;
+}
+
+.caratula h2 {
+    margin: 0 0 8px 0;
+    color: var(--azul-bs);
+    font-size: 22px;
+}
+
+.caratula-tp {
+    margin: 0 0 24px 0;
+    color: var(--verde-bs);
+    font-size: 16px;
+}
+
+/* Los datos van separados de lo de arriba por una línea */
+.caratula-datos {
+    padding-top: 16px;
+    border-top: 1px solid #e3e8f0;
+}
+
+.caratula-datos p {
+    margin: 0 0 8px 0;
+    color: #333333;
+    font-size: 15px;
 }
 
 
