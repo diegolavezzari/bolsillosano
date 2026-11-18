@@ -47,7 +47,7 @@ async function arrancar() {
 
     if (!data.session) {
         // ! significa "no": si NO hay sesión, afuera
-        //window.location.href = 'login.html';
+        window.location.href = 'login.html';
         return;
     }
 

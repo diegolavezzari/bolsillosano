@@ -60,7 +60,7 @@ async function arrancar() {
     const { data } = await cliente.auth.getSession();
 
     if (!data.session) {
-        //window.location.href = 'login.html';
+        window.location.href = 'login.html';
         return;
     }
 

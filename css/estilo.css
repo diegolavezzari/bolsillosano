@@ -139,6 +139,48 @@ body {
 }
 
 
+/* ===== NAVEGADOR DE ADENTRO (páginas con sesión) ===== */
+
+/* Celular y tablet: la misma pastilla, pero en 2 renglones.
+   Arriba: logo + Cerrar sesión. Abajo: todos los links.
+   Uso .navegador.navegador-app (dos clases) para que le gane a la regla
+   .navegador de la media query de 768px */
+.navegador.navegador-app {
+    height: auto;                      /* la altura la da el contenido (2 renglones) */
+    flex-wrap: wrap;                   /* deja que el menú baje a otro renglón */
+    padding: 10px 16px;
+    border-radius: 28px;               /* un poco menos redondo, porque es más alta */
+    row-gap: 6px;                      /* espacio entre un renglón y el otro */
+}
+
+.navegador-app .menu {
+    order: 3;                          /* el menú va al final: abajo del logo y del botón */
+    width: 100%;                       /* ocupa todo el renglón de abajo */
+    gap: 16px;
+    overflow-x: auto;                  /* si no entran, se deslizan de costado con el dedo */
+    scrollbar-width: none;             /* oculta la barrita de scroll */
+    padding-bottom: 4px;
+    position: static;                  /* anula el centrado "absolute" de 1024px */
+    transform: none;
+}
+
+.navegador-app .menu a {
+    font-size: 15px;
+    white-space: nowrap;               /* "Inversiones" no se corta en dos */
+}
+
+/* El link de la página en la que estás */
+.menu a.activo {
+    color: var(--verde-bs);
+    border-bottom: 2px solid var(--verde-bs);
+}
+
+/* La barra ahora es más alta: el contenido que viene justo después baja un poco más */
+.navegador-app + div {
+    padding-top: 150px;
+}
+
+
 /* ===== PORTADA (hero) ===== */
 
 /* La foto ocupa todo el ancho de fondo, limpia (sin degradé encima) */
@@ -1517,5 +1559,31 @@ body {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+    }
+}
+
+
+/* ===== NAVEGADOR DE ADENTRO EN LA COMPU (1200px o más) ===== */
+
+/* Hay lugar: entra todo en una sola fila, como la pastilla original */
+@media (min-width: 1200px) {
+
+    .navegador.navegador-app {
+        height: 70px;
+        flex-wrap: nowrap;
+        padding: 0 24px;
+        border-radius: 40px;
+    }
+
+    .navegador-app .menu {
+        order: 0;                      /* vuelve a su lugar: entre el logo y el botón */
+        width: auto;
+        gap: 24px;
+        overflow-x: visible;
+        padding-bottom: 0;
+    }
+
+    .navegador-app + div {
+        padding-top: 120px;
     }
 }

@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tribunal de amigos - Bolsillo Sano</title>
-    <link rel="stylesheet" href="css/estilo.css?v=26">  <!-- ?v=26: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+    <link rel="stylesheet" href="css/estilo.css?v=27">  <!-- ?v=27: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
 </head>
 <body>
 
-    <!-- Navegador: el mismo de inicio.html -->
-    <nav class="navegador">
-        <a href="index.html" class="marca">
+    <!-- Navegador de ADENTRO (con sesión): todas las secciones de la app + las públicas.
+         Es el mismo en inicio, movimientos, metas, amigos y tribunal.
+         class="activo" va en el link de la página en la que estás (se pinta de verde) -->
+    <nav class="navegador navegador-app">
+        <a href="inicio.html" class="marca">
             <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
             <span class="marca-nombre">Bolsillo Sano</span>
         </a>
 
         <div class="menu">
+            <a href="inicio.html">Inicio</a>
+            <a href="movimientos.html">Flujo</a>
+            <a href="metas.html">Metas</a>
+            <a href="amigos.html">Amigos</a>
+            <a href="tribunal.html" class="activo">Tribunal</a>
             <a href="consejos.html">Consejos</a>
             <a href="inversiones.html">Inversiones</a>
             <a href="nosotros.html">Nosotros</a>
@@ -77,7 +84,6 @@
 
         <div class="social-links">
             <a href="amigos.html" class="volver">Mis amigos →</a>
-            <a href="inicio.html" class="volver">← Volver al inicio</a>
         </div>
 
     </div>
