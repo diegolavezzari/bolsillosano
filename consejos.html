@@ -4,33 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consejos - Bolsillo Sano</title>
-    <link rel="stylesheet" href="css/estilo.css?v=26">  <!-- ?v=26: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
+    <link rel="stylesheet" href="css/estilo.css?v=27">  <!-- ?v=27: cambiar el número cuando cambia el CSS, así el celular no usa el viejo -->
 </head>
 <body>
 
-    <!-- Navegador: el mismo de index.html -->
+    <!-- Navegador: sin sesión es el mismo de index.html.
+         Con la sesión abierta, el JS lo convierte en el de adentro (como en inicio.html) -->
     <nav class="navegador">
-        <!-- La marca lleva a la portada -->
-        <a href="index.html" class="marca">
+        <!-- La marca lleva a la portada (con sesión, el JS la cambia a inicio.html) -->
+        <a href="index.html" class="marca" id="marca">
             <img src="img/logo_bolsillo_sano.png" alt="Logo de Bolsillo Sano" class="marca-logo">
             <span class="marca-nombre">Bolsillo Sano</span>
         </a>
 
         <div class="menu">
-            <a href="consejos.html">Consejos</a>
+            <!-- Estos 5 solo se ven con la sesión abierta: el JS les saca el hidden -->
+            <a href="inicio.html" class="solo-adentro" hidden>Inicio</a>
+            <a href="movimientos.html" class="solo-adentro" hidden>Flujo</a>
+            <a href="metas.html" class="solo-adentro" hidden>Metas</a>
+            <a href="amigos.html" class="solo-adentro" hidden>Amigos</a>
+            <a href="tribunal.html" class="solo-adentro" hidden>Tribunal</a>
+            <a href="consejos.html" class="activo">Consejos</a>
             <a href="inversiones.html">Inversiones</a>
             <a href="nosotros.html">Nosotros</a>
         </div>
 
         <!-- Botón Ingresar: el ícono es un dibujo SVG (una cabeza y los hombros).
              aria-label: en el celular el texto no se ve, así los lectores de pantalla igual dicen "Ingresar" -->
-        <a href="login.html" class="boton-ingresar" aria-label="Ingresar">
+        <a href="login.html" class="boton-ingresar" id="btn-ingresar" aria-label="Ingresar">
             <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="8" r="4"></circle>
                 <path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path>
             </svg>
             <span class="boton-ingresar-texto">Ingresar</span>
         </a>
+
+        <!-- Cerrar sesión: arranca oculto, el JS lo muestra (y esconde Ingresar) si hay sesión -->
+        <button type="button" id="btn-salir" class="boton-ingresar boton-salir" aria-label="Cerrar sesión" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 21H5V3h4"></path>
+                <path d="M16 17l5-5-5-5"></path>
+                <path d="M21 12H9"></path>
+            </svg>
+            <span class="boton-ingresar-texto">Cerrar sesión</span>
+        </button>
     </nav>
 
     <!-- ===== CONSEJOS ===== -->
@@ -118,6 +135,11 @@
         <footer>Bolsillo Sano — IFTS 16 — <span id="anio"></span></footer>
     </div>
 
+    <!-- 1. La librería de Supabase (desde internet) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <!-- 2. Nuestra conexión (usa la librería, por eso va después) -->
+    <script src="js/supabase.js"></script>
+    <!-- 3. El JS de esta página (usa la conexión, por eso va último) -->
     <script src="js/consejos.js"></script>
 </body>
 </html>
