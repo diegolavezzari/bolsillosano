@@ -165,7 +165,6 @@ body {
 }
 
 .navegador-app .menu a {
-    font-size: 15px;
     white-space: nowrap;               /* "Inversiones" no se corta en dos */
 }
 
@@ -1563,10 +1562,10 @@ body {
 }
 
 
-/* ===== NAVEGADOR DE ADENTRO EN LA COMPU (1200px o más) ===== */
+/* ===== NAVEGADOR DE ADENTRO EN LA COMPU (1340px o más) ===== */
 
 /* Hay lugar: entra todo en una sola fila, como la pastilla original */
-@media (min-width: 1200px) {
+@media (min-width: 1340px) {
 
     .navegador.navegador-app {
         height: 70px;
