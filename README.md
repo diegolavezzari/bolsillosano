@@ -12,14 +12,13 @@ de que ocurran**, con la ayuda de un "Tribunal de amigos".
 
 ## Datos del trabajo práctico
 
-| | |
-|---|---|
-| **Institución** | IFTS N° 16 |
-| **Año** | Segundo año |
-| **Materia** | Seminario de Actualización de Tecnología Web |
-| **Profesora** | Cristina Ferro Croce |
-| **Trabajo práctico** | Bolsillo Sano |
-| **Período de desarrollo** | Septiembre – noviembre de 2026 |
+| **Institución**           | IFTS N° 16                                   |
+| ------------------------- | -------------------------------------------- |
+| **Año**                   | Segundo año                                  |
+| **Materia**               | Seminario de Actualización de Tecnología Web |
+| **Profesora**             | Cristina Ferro Croce                         |
+| **Trabajo práctico**      | Bolsillo Sano                                |
+| **Período de desarrollo** | Septiembre – noviembre de 2026               |
 
 ### Integrantes
 
@@ -182,6 +181,10 @@ bolsillosano/
 - **Páginas protegidas:** si no hay sesión, inicio, flujo, metas, amigos y
   tribunal mandan a `login.html`. "Cerrar sesión" con `signOut()`.
 
+
+![Diagrama de la base de datos|837](img/base-de-datos.png)
+
+
 ### Paso 7 — Las pantallas de la app (10 de noviembre)
 
 - **Flujo (`movimientos.html`):** tipo (ingreso / gasto / compra evitada), monto,
@@ -235,6 +238,8 @@ bolsillosano/
 
 ## Cómo probarlo en la compu
 
+Realizamos todas las pruebas en la rama  "base-local" para luego hacer un merge al final del proyecto.
+
 **Solo las páginas** (usa la base real):
 
 ```bash
@@ -255,13 +260,15 @@ npx supabase stop      # la apaga (los datos quedan guardados)
 - Panel de la base local: http://127.0.0.1:54323
 - Mails de prueba (confirmaciones, recuperar contraseña): http://127.0.0.1:54324
 
+
+
 ---
 
 ## Pendientes
 
 - [ ] Avisos push al tribunal (que les llegue una notificación a los amigos).
 - [ ] Pantallas de Perfil y Logros.
-- [ ] Usuarios de prueba cargados automáticamente en la base local (`seed.sql`).
+- [ ] Usuarios de prueba cargados automáticamente en la base local.
 - [ ] Calculadora de inversiones según el perfil (con inflación y plazo).
 - [ ] Mejoras del test de inversores (explicar por qué salió cada perfil).
 
